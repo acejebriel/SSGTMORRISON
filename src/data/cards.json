@@ -1,0 +1,173 @@
+[
+  {
+    "id": "plat1a",
+    "issuer": "Amex",
+    "name": "Platinum (Ace)",
+    "num": "73009",
+    "owner": "ace",
+    "benefits": [
+      { "key": "plat1a-saks1", "name": "Saks Fifth Avenue credit (Jan–Jun)", "used": 0, "total": 50, "period": "Jan-Jun" },
+      { "key": "plat1a-saks2", "name": "Saks Fifth Avenue credit (Jul–Dec)", "used": 0, "total": 50, "period": "Jul-Dec" },
+      { "key": "plat1a-uber", "name": "Uber Cash", "used": 0, "total": 15, "period": "monthly" },
+      { "key": "plat1a-digital", "name": "Digital Entertainment credit", "used": 0, "total": 20, "period": "monthly" },
+      { "key": "plat1a-airline", "name": "Airline fee credit", "used": 0, "total": 200, "period": "annual" },
+      { "key": "plat1a-hotel", "name": "Hotel credit (Fine Hotels & Resorts)", "used": 0, "total": 200, "period": "annual" },
+      { "key": "plat1a-clear", "name": "CLEAR Plus credit", "used": 0, "total": 189, "period": "annual" },
+      { "key": "plat1a-equinox", "name": "Equinox credit", "used": 0, "total": 300, "period": "annual" },
+      { "key": "plat1a-lulu", "name": "Lululemon credit", "used": 0, "total": 75, "period": "Jan-Mar" }
+    ],
+    "freeNights": []
+  },
+  {
+    "id": "plat1h",
+    "issuer": "Amex",
+    "name": "Platinum (Haley)",
+    "num": "55021",
+    "owner": "haley",
+    "benefits": [
+      { "key": "plat1h-saks1", "name": "Saks Fifth Avenue credit (Jan–Jun)", "used": 0, "total": 50, "period": "Jan-Jun" },
+      { "key": "plat1h-saks2", "name": "Saks Fifth Avenue credit (Jul–Dec)", "used": 0, "total": 50, "period": "Jul-Dec" },
+      { "key": "plat1h-uber", "name": "Uber Cash", "used": 0, "total": 15, "period": "monthly" },
+      { "key": "plat1h-digital", "name": "Digital Entertainment credit", "used": 0, "total": 20, "period": "monthly" },
+      { "key": "plat1h-airline", "name": "Airline fee credit", "used": 0, "total": 200, "period": "annual" },
+      { "key": "plat1h-hotel", "name": "Hotel credit (Fine Hotels & Resorts)", "used": 0, "total": 200, "period": "annual" },
+      { "key": "plat1h-clear", "name": "CLEAR Plus credit", "used": 0, "total": 189, "period": "annual" },
+      { "key": "plat1h-equinox", "name": "Equinox credit", "used": 0, "total": 300, "period": "annual" }
+    ],
+    "freeNights": []
+  },
+  {
+    "id": "biz-plat1",
+    "issuer": "Amex",
+    "name": "Business Platinum",
+    "num": "12048",
+    "owner": "ace",
+    "benefits": [
+      { "key": "biz-plat1-dell", "name": "Dell Technologies credit (Jan–Jun)", "used": 0, "total": 200, "period": "Jan-Jun" },
+      { "key": "biz-plat1-dell2", "name": "Dell Technologies credit (Jul–Dec)", "used": 0, "total": 200, "period": "Jul-Dec" },
+      { "key": "biz-plat1-airline", "name": "Airline fee credit", "used": 0, "total": 200, "period": "annual" },
+      { "key": "biz-plat1-clear", "name": "CLEAR Plus credit", "used": 0, "total": 189, "period": "annual" }
+    ],
+    "freeNights": []
+  },
+  {
+    "id": "gold1a",
+    "issuer": "Amex",
+    "name": "Gold (Ace)",
+    "num": "88041",
+    "owner": "ace",
+    "benefits": [
+      { "key": "gold1a-dining", "name": "Dining credit (Grubhub/etc)", "used": 0, "total": 10, "period": "monthly" },
+      { "key": "gold1a-uber", "name": "Uber Cash", "used": 0, "total": 10, "period": "monthly" },
+      { "key": "gold1a-resy", "name": "Resy credit", "used": 0, "total": 50, "period": "Jan-Jun" },
+      { "key": "gold1a-resy2", "name": "Resy credit", "used": 0, "total": 50, "period": "Jul-Dec" },
+      { "key": "gold1a-dunkin", "name": "Dunkin' credit", "used": 0, "total": 7, "period": "monthly" }
+    ],
+    "freeNights": []
+  },
+  {
+    "id": "gold1h",
+    "issuer": "Amex",
+    "name": "Gold (Haley)",
+    "num": "66077",
+    "owner": "haley",
+    "benefits": [
+      { "key": "gold1h-dining", "name": "Dining credit (Grubhub/etc)", "used": 0, "total": 10, "period": "monthly" },
+      { "key": "gold1h-uber", "name": "Uber Cash", "used": 0, "total": 10, "period": "monthly" },
+      { "key": "gold1h-resy", "name": "Resy credit", "used": 0, "total": 50, "period": "Jan-Jun" },
+      { "key": "gold1h-resy2", "name": "Resy credit", "used": 0, "total": 50, "period": "Jul-Dec" },
+      { "key": "gold1h-dunkin", "name": "Dunkin' credit", "used": 0, "total": 7, "period": "monthly" }
+    ],
+    "freeNights": []
+  },
+  {
+    "id": "hilton-surpass-a",
+    "issuer": "Amex",
+    "name": "Hilton Surpass (Ace)",
+    "num": "31002",
+    "owner": "ace",
+    "benefits": [
+      { "key": "hilton-surpass-a-resort", "name": "Hilton resort credit", "used": 0, "total": 50, "period": "quarterly" },
+      { "key": "hilton-surpass-a-airline", "name": "Airline fee credit", "used": 0, "total": 50, "period": "quarterly" }
+    ],
+    "freeNights": [
+      { "label": "Free night (Hilton)", "exp": "2026-01-15" }
+    ]
+  },
+  {
+    "id": "hilton-biz",
+    "issuer": "Amex",
+    "name": "Hilton Business",
+    "num": "44009",
+    "owner": "ace",
+    "benefits": [
+      { "key": "hilton-biz-resort", "name": "Hilton resort credit", "used": 0, "total": 60, "period": "quarterly" }
+    ],
+    "freeNights": [
+      { "label": "Free night (Hilton Biz)", "exp": "2026-03-01" }
+    ]
+  },
+  {
+    "id": "chase-sapphire",
+    "issuer": "Chase",
+    "name": "Sapphire Reserve",
+    "num": "20034",
+    "owner": "ace",
+    "benefits": [
+      { "key": "chase-sapphire-travel", "name": "Travel credit", "used": 0, "total": 300, "period": "annual" },
+      { "key": "chase-sapphire-doordash", "name": "DoorDash DashPass credit", "used": 0, "total": 5, "period": "monthly" },
+      { "key": "chase-sapphire-lyft", "name": "Lyft Pink credit", "used": 0, "total": 10, "period": "monthly" }
+    ],
+    "freeNights": []
+  },
+  {
+    "id": "chase-ink-pref",
+    "issuer": "Chase",
+    "name": "Ink Business Preferred",
+    "num": "97011",
+    "owner": "ace",
+    "benefits": [
+      { "key": "chase-ink-pref-cellphone", "name": "Cell phone protection", "used": 0, "total": 0, "period": "annual" }
+    ],
+    "freeNights": []
+  },
+  {
+    "id": "citi-custom-cash",
+    "issuer": "Citi",
+    "name": "Custom Cash",
+    "num": "54033",
+    "owner": "haley",
+    "benefits": [
+      { "key": "citi-custom-cash-cb", "name": "5% cash back (top category)", "used": 0, "total": 500, "period": "monthly" }
+    ],
+    "freeNights": []
+  },
+  {
+    "id": "marriott-bonvoy-a",
+    "issuer": "Amex",
+    "name": "Marriott Bonvoy Brilliant (Ace)",
+    "num": "19088",
+    "owner": "ace",
+    "benefits": [
+      { "key": "marriott-bonvoy-a-dining", "name": "Dining credit", "used": 0, "total": 25, "period": "monthly" },
+      { "key": "marriott-bonvoy-a-travel", "name": "Travel credit", "used": 0, "total": 300, "period": "annual" }
+    ],
+    "freeNights": [
+      { "label": "Free night award (50k pts)", "exp": "2027-02-10" }
+    ]
+  },
+  {
+    "id": "marriott-bonvoy-h",
+    "issuer": "Amex",
+    "name": "Marriott Bonvoy Brilliant (Haley)",
+    "num": "82071",
+    "owner": "haley",
+    "benefits": [
+      { "key": "marriott-bonvoy-h-dining", "name": "Dining credit", "used": 0, "total": 25, "period": "monthly" },
+      { "key": "marriott-bonvoy-h-travel", "name": "Travel credit", "used": 0, "total": 300, "period": "annual" }
+    ],
+    "freeNights": [
+      { "label": "Free night award (50k pts)", "exp": "2026-08-22" }
+    ]
+  }
+]
