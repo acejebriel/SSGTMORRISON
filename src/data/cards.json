@@ -2,8 +2,8 @@
   {
     "id": "ace-plat-1",
     "issuer": "Amex Platinum",
-    "name": "Plat 1",
-    "num": "73009",
+    "name": "Plat 1 - 73009",
+    "num": " ",
     "owner": "ace",
     "benefits": [
       { "key": "ace-plat-1-lulu",    "name": "Lululemon credit",             "used": 0,  "total": 75,  "period": "Jan-Mar" },
