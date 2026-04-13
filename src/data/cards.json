@@ -20,8 +20,7 @@
   {
     "id": "ace-plat-2",
     "issuer": "Amex Platinum",
-    "name": "Plat 2 (CS)",
-    "num": "72002",
+    "name": "Plat 2 (CS) - 72002",
     "owner": "ace",
     "benefits": [
       { "key": "ace-plat-2-lulu",    "name": "Lululemon credit",                  "used": 0,  "total": 75,  "period": "Jan-Mar" },
@@ -38,8 +37,7 @@
   {
     "id": "ace-plat-3",
     "issuer": "Amex Platinum",
-    "name": "Plat 3",
-    "num": "02004",
+    "name": "Plat 3 - 02004",
     "owner": "ace",
     "benefits": [
       { "key": "ace-plat-3-lulu",    "name": "Lululemon credit",                    "used": 0,  "total": 75,  "period": "Jan-Mar" },
@@ -56,8 +54,7 @@
   {
     "id": "ace-plat-4",
     "issuer": "Amex Platinum",
-    "name": "Plat 4",
-    "num": "51005",
+    "name": "Plat 4 - 51005",
     "owner": "ace",
     "benefits": [
       { "key": "ace-plat-4-lulu",    "name": "Lululemon credit",                 "used": 0,  "total": 75,  "period": "Jan-Mar" },
@@ -74,8 +71,7 @@
   {
     "id": "ace-plat-5",
     "issuer": "Amex Platinum",
-    "name": "Plat 5 (MS)",
-    "num": "81006",
+    "name": "Plat 5 (MS) - 81006",
     "owner": "ace",
     "benefits": [
       { "key": "ace-plat-5-lulu",    "name": "Lululemon credit",                    "used": 0, "total": 75,  "period": "Jan-Mar" },
@@ -92,8 +88,7 @@
   {
     "id": "ace-plat-6",
     "issuer": "Amex Platinum",
-    "name": "Plat 6",
-    "num": "21008",
+    "name": "Plat 6 - 21008",
     "owner": "ace",
     "benefits": [
       { "key": "ace-plat-6-lulu",    "name": "Lululemon credit",              "used": 0, "total": 75,  "period": "Jan-Mar" },
@@ -111,8 +106,7 @@
   {
     "id": "ace-biz-plat-1",
     "issuer": "Amex Biz Platinum",
-    "name": "Biz Plat 1",
-    "num": "11001",
+    "name": "Biz Plat 1 - 11001",
     "owner": "ace",
     "benefits": [
       { "key": "ace-biz-plat-1-airline",  "name": "Airline credit (United)",         "used": 0, "total": 200, "period": "annual"  },
