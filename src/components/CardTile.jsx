@@ -4,12 +4,14 @@ import FreeNightRow from './FreeNightRow'
 import { isUrgent, isFreeNightUrgent } from '../lib/periods'
 
 const ISSUER_COLORS = {
-  Amex: 'bg-blue-50 border-blue-200',
+  'Amex Platinum': 'bg-blue-50 border-blue-200',
+  'Amex Biz Platinum': 'bg-blue-50 border-blue-200',
+  'Amex Delta': 'bg-purple-50 border-purple-200',
+  'Amex Gold': 'bg-yellow-50 border-yellow-300',
+  'Amex Hilton': 'bg-sky-50 border-sky-200',
+  'Amex Marriott': 'bg-rose-50 border-rose-200',
   Chase: 'bg-indigo-50 border-indigo-200',
   Citi: 'bg-cyan-50 border-cyan-200',
-  'Bank of America': 'bg-red-50 border-red-200',
-  Capital: 'bg-green-50 border-green-200',
-  Wells: 'bg-yellow-50 border-yellow-200',
 }
 
 const OWNER_BADGE = {
