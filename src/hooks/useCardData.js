@@ -12,6 +12,15 @@ export function useCardData() {
   const [cards, setCards] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [lastUpdated, setLastUpdated] = useState(
+    () => localStorage.getItem('cc_last_updated') || null
+  )
+
+  function touchLastUpdated() {
+    const now = new Date().toISOString()
+    localStorage.setItem('cc_last_updated', now)
+    setLastUpdated(now)
+  }
 
   const loadData = useCallback(async () => {
     setLoading(true)
@@ -112,6 +121,7 @@ export function useCardData() {
       notes: patch.notes !== undefined ? patch.notes : currentBenefit?.notes ?? '',
       reset_period: currentPeriod,
     })
+    touchLastUpdated()
   }, [cards])
 
   const updateFreeNight = useCallback(async (fnId, cardId, patch) => {
@@ -135,7 +145,8 @@ export function useCardData() {
       used: patch.used !== undefined ? patch.used : currentFn?.used ?? false,
       exp: patch.exp !== undefined ? patch.exp : currentFn?.exp ?? '',
     })
+    touchLastUpdated()
   }, [cards])
 
-  return { cards, loading, error, reload: loadData, updateBenefit, updateFreeNight }
+  return { cards, loading, error, reload: loadData, updateBenefit, updateFreeNight, lastUpdated }
 }

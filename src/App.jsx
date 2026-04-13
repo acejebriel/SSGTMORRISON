@@ -1,11 +1,71 @@
 import { useState, useMemo } from 'react'
+import dayjs from 'dayjs'
 import { useCardData } from './hooks/useCardData'
-import { isUrgent, isFreeNightUrgent } from './lib/periods'
 import SummaryBar from './components/SummaryBar'
 import FilterBar from './components/FilterBar'
 import CardTile from './components/CardTile'
 import LoginScreen from './components/LoginScreen'
 
+// ── Filter helpers ──────────────────────────────────────────────
+const HOTEL_ISSUERS = ['Amex Hilton', 'Amex Marriott']
+const HOTEL_KEYWORDS = ['hyatt', 'ihg', 'hotel', 'marriott', 'hilton']
+const AIRLINE_ISSUERS = ['Amex Delta']
+const AIRLINE_KEYWORDS = ['delta', 'united', 'southwest', 'jetblue', 'airline']
+
+function isHotelCard(card) {
+  if (HOTEL_ISSUERS.includes(card.issuer)) return true
+  const n = card.name.toLowerCase()
+  return HOTEL_KEYWORDS.some((k) => n.includes(k))
+}
+
+function isAirlineCard(card) {
+  if (AIRLINE_ISSUERS.includes(card.issuer)) return true
+  const n = card.name.toLowerCase()
+  return AIRLINE_KEYWORDS.some((k) => n.includes(k))
+}
+
+function applyFilter(cards, filter) {
+  switch (filter) {
+    case 'ace':       return cards.filter((c) => c.owner === 'ace')
+    case 'haley':     return cards.filter((c) => c.owner === 'haley')
+    case 'amex-plat': return cards.filter((c) => c.issuer === 'Amex Platinum')
+    case 'amex-biz':  return cards.filter((c) => c.issuer === 'Amex Biz Platinum')
+    case 'chase':     return cards.filter((c) => c.issuer === 'Chase')
+    case 'hotels':    return cards.filter(isHotelCard)
+    case 'airlines':  return cards.filter(isAirlineCard)
+    default:          return cards
+  }
+}
+
+// ── Search: match card/issuer OR individual benefits ────────────
+function applySearch(cards, query) {
+  if (!query.trim()) return cards
+  const q = query.toLowerCase()
+  const result = []
+
+  for (const card of cards) {
+    const cardMatch =
+      card.name.toLowerCase().includes(q) ||
+      card.issuer.toLowerCase().includes(q)
+
+    if (cardMatch) {
+      result.push(card)
+      continue
+    }
+
+    const matchingBenefits = card.benefits.filter((b) =>
+      b.name.toLowerCase().includes(q)
+    )
+    if (matchingBenefits.length > 0) {
+      // Return card with only the matching benefits visible
+      result.push({ ...card, benefits: matchingBenefits })
+    }
+  }
+
+  return result
+}
+
+// ── Group by issuer ─────────────────────────────────────────────
 function groupByIssuer(cards) {
   const groups = {}
   for (const card of cards) {
@@ -15,6 +75,17 @@ function groupByIssuer(cards) {
   return groups
 }
 
+// ── Last updated formatter ──────────────────────────────────────
+function formatLastUpdated(iso) {
+  if (!iso) return null
+  const d = dayjs(iso)
+  const now = dayjs()
+  if (d.isSame(now, 'day')) return `Today at ${d.format('h:mm A')}`
+  if (d.isSame(now.subtract(1, 'day'), 'day')) return `Yesterday at ${d.format('h:mm A')}`
+  return d.format('MMM D [at] h:mm A')
+}
+
+// ── App ─────────────────────────────────────────────────────────
 export default function App() {
   const [authed, setAuthed] = useState(
     () => sessionStorage.getItem('cc_auth') === '1'
@@ -22,37 +93,11 @@ export default function App() {
   const [filter, setFilter] = useState('all')
   const [search, setSearch] = useState('')
 
-  const { cards, loading, error, updateBenefit, updateFreeNight } = useCardData()
+  const { cards, loading, error, updateBenefit, updateFreeNight, lastUpdated } =
+    useCardData()
 
   const filteredCards = useMemo(() => {
-    let result = cards
-
-    if (search.trim()) {
-      const q = search.toLowerCase()
-      result = result.filter(
-        (c) =>
-          c.name.toLowerCase().includes(q) ||
-          c.issuer.toLowerCase().includes(q)
-      )
-    }
-
-    if (filter === 'ace') result = result.filter((c) => c.owner === 'ace')
-    else if (filter === 'haley') result = result.filter((c) => c.owner === 'haley')
-    else if (filter === 'urgent') {
-      result = result.filter(
-        (c) =>
-          c.benefits.some((b) => isUrgent(b.period, b.used, b.total)) ||
-          c.freeNights.some((fn) => isFreeNightUrgent(fn.exp) && !fn.used)
-      )
-    } else if (filter === 'unused') {
-      result = result.filter(
-        (c) =>
-          c.benefits.some((b) => b.used < b.total && b.total > 0) ||
-          c.freeNights.some((fn) => !fn.used)
-      )
-    }
-
-    return result
+    return applySearch(applyFilter(cards, filter), search)
   }, [cards, filter, search])
 
   const groups = useMemo(() => groupByIssuer(filteredCards), [filteredCards])
@@ -63,24 +108,40 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Top nav */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-10 shadow-sm">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="text-xl">💳</span>
             <span className="font-bold text-gray-900 text-base sm:text-lg">
               Card Benefits
             </span>
           </div>
-          <button
-            onClick={() => {
-              sessionStorage.removeItem('cc_auth')
-              setAuthed(false)
-            }}
-            className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
-          >
-            Sign out
-          </button>
+
+          <div className="flex items-center gap-4">
+            {lastUpdated && (
+              <span className="text-xs text-gray-400 hidden sm:block">
+                Updated {formatLastUpdated(lastUpdated)}
+              </span>
+            )}
+            <button
+              onClick={() => {
+                sessionStorage.removeItem('cc_auth')
+                setAuthed(false)
+              }}
+              className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              Sign out
+            </button>
+          </div>
         </div>
+
+        {/* Last updated on mobile — below the nav row */}
+        {lastUpdated && (
+          <div className="sm:hidden px-4 pb-2 text-xs text-gray-400">
+            Updated {formatLastUpdated(lastUpdated)}
+          </div>
+        )}
       </header>
 
       <main className="max-w-6xl mx-auto px-4 py-5">
