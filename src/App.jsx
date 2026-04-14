@@ -5,6 +5,7 @@ import SummaryBar from './components/SummaryBar'
 import FilterBar from './components/FilterBar'
 import CardTile from './components/CardTile'
 import LoginScreen from './components/LoginScreen'
+import AddCardModal from './components/AddCardModal'
 
 // ── Filter helpers ──────────────────────────────────────────────
 const HOTEL_ISSUERS = ['Amex Hilton', 'Amex Marriott']
@@ -57,7 +58,6 @@ function applySearch(cards, query) {
       b.name.toLowerCase().includes(q)
     )
     if (matchingBenefits.length > 0) {
-      // Return card with only the matching benefits visible
       result.push({ ...card, benefits: matchingBenefits })
     }
   }
@@ -92,9 +92,14 @@ export default function App() {
   )
   const [filter, setFilter] = useState('all')
   const [search, setSearch] = useState('')
+  const [showAddCard, setShowAddCard] = useState(false)
 
-  const { cards, loading, error, updateBenefit, updateFreeNight, updateCardNote, lastUpdated } =
-    useCardData()
+  const {
+    cards, loading, error,
+    updateBenefit, updateFreeNight, updateCardNote,
+    addCard, deleteCard,
+    lastUpdated,
+  } = useCardData()
 
   const filteredCards = useMemo(() => {
     return applySearch(applyFilter(cards, filter), search)
@@ -118,12 +123,18 @@ export default function App() {
             </span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {lastUpdated && (
               <span className="text-xs text-gray-400 hidden sm:block">
                 Updated {formatLastUpdated(lastUpdated)}
               </span>
             )}
+            <button
+              onClick={() => setShowAddCard(true)}
+              className="text-xs bg-blue-600 text-white px-3 py-1.5 rounded-full font-medium hover:bg-blue-700 transition-colors"
+            >
+              + Add Card
+            </button>
             <button
               onClick={() => {
                 sessionStorage.removeItem('cc_auth')
@@ -136,7 +147,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* Last updated on mobile — below the nav row */}
+        {/* Last updated on mobile */}
         {lastUpdated && (
           <div className="sm:hidden px-4 pb-2 text-xs text-gray-400">
             Updated {formatLastUpdated(lastUpdated)}
@@ -181,6 +192,7 @@ export default function App() {
                         onUpdateBenefit={updateBenefit}
                         onUpdateFreeNight={updateFreeNight}
                         onUpdateCardNote={updateCardNote}
+                        onDelete={deleteCard}
                       />
                     ))}
                   </div>
@@ -190,6 +202,13 @@ export default function App() {
           </>
         )}
       </main>
+
+      {showAddCard && (
+        <AddCardModal
+          onAdd={addCard}
+          onClose={() => setShowAddCard(false)}
+        />
+      )}
     </div>
   )
 }

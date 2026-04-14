@@ -20,7 +20,7 @@
   {
     "id": "ace-plat-2",
     "issuer": "Amex Platinum",
-    "name": "Plat 2 (CS) - 72002",
+    "name": "Plat 2 CS - 72002",
     "owner": "ace",
     "benefits": [
       { "key": "ace-plat-2-lulu",    "name": "Lululemon credit",                  "used": 0,  "total": 75,  "period": "Jan-Mar" },
@@ -71,7 +71,7 @@
   {
     "id": "ace-plat-5",
     "issuer": "Amex Platinum",
-    "name": "Plat 5 (MS) - 81006",
+    "name": "Plat 5 MS - 81006",
     "owner": "ace",
     "benefits": [
       { "key": "ace-plat-5-lulu",    "name": "Lululemon credit",                    "used": 0, "total": 75,  "period": "Jan-Mar" },
@@ -213,7 +213,7 @@
   {
     "id": "ace-csr-1",
     "issuer": "Chase",
-    "name": "CSR 1 (acearcapadilla)",
+    "name": "CSR 1",
     "num": "507",
     "owner": "ace",
     "benefits": [
@@ -226,7 +226,7 @@
   {
     "id": "ace-csr-2",
     "issuer": "Chase",
-    "name": "CSR 2 (acedayspro)",
+    "name": "CSR 2",
     "num": "375",
     "owner": "ace",
     "benefits": [
@@ -239,7 +239,7 @@
   {
     "id": "haley-csr",
     "issuer": "Chase",
-    "name": "CSR (Haley)",
+    "name": "CSR",
     "num": "0017",
     "owner": "haley",
     "benefits": [
@@ -262,7 +262,7 @@
   {
     "id": "haley-plat-1",
     "issuer": "Amex Platinum",
-    "name": "Plat 1 (Haley)",
+    "name": "Plat 1",
     "num": "83005",
     "owner": "haley",
     "benefits": [
@@ -280,7 +280,7 @@
   {
     "id": "haley-plat-2",
     "issuer": "Amex Platinum",
-    "name": "Plat 2 (MS, Haley)",
+    "name": "Plat 2 MS",
     "num": "11005",
     "owner": "haley",
     "benefits": [
@@ -298,7 +298,7 @@
   {
     "id": "haley-plat-3",
     "issuer": "Amex Platinum",
-    "name": "Plat 3 (CS, Haley)",
+    "name": "Plat 3 CS",
     "num": "51003",
     "owner": "haley",
     "benefits": [
@@ -316,7 +316,7 @@
   {
     "id": "haley-plat-4",
     "issuer": "Amex Platinum",
-    "name": "Plat 4 (Haley)",
+    "name": "Plat 4",
     "num": "91008",
     "owner": "haley",
     "benefits": [
@@ -334,7 +334,7 @@
   {
     "id": "haley-plat-5",
     "issuer": "Amex Platinum",
-    "name": "Plat 5 (Haley / Ms. Dee)",
+    "name": "Plat 5",
     "num": "01005",
     "owner": "haley",
     "benefits": [
@@ -352,7 +352,7 @@
   {
     "id": "haley-plat-6",
     "issuer": "Amex Platinum",
-    "name": "Plat 6 (Haley)",
+    "name": "Plat 6",
     "num": "81007",
     "owner": "haley",
     "benefits": [
@@ -399,7 +399,7 @@
   {
     "id": "haley-hilton-aspire-1",
     "issuer": "Amex Hilton",
-    "name": "Hilton Aspire 1 (Haley)",
+    "name": "Hilton Aspire 1",
     "num": "91000",
     "owner": "haley",
     "benefits": [
@@ -413,7 +413,7 @@
   {
     "id": "haley-hilton-aspire-2",
     "issuer": "Amex Hilton",
-    "name": "Hilton Aspire 2 (Haley)",
+    "name": "Hilton Aspire 2",
     "num": "21009",
     "owner": "haley",
     "benefits": [
@@ -427,7 +427,7 @@
   {
     "id": "haley-hilton-aspire-3",
     "issuer": "Amex Hilton",
-    "name": "Hilton Aspire 3 (Haley)",
+    "name": "Hilton Aspire 3",
     "num": "61004",
     "owner": "haley",
     "benefits": [
@@ -464,7 +464,7 @@
   {
     "id": "haley-marriott",
     "issuer": "Amex Marriott",
-    "name": "Marriott Bonvoy Brilliant (Haley)",
+    "name": "Marriott Bonvoy Brilliant",
     "num": "91006",
     "owner": "haley",
     "benefits": [],

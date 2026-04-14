@@ -4,6 +4,7 @@ import { getCurrentPeriodKey, rollFreeNightExp } from '../lib/periods'
 import cardsRaw from '../data/cards.json'
 
 const CARD_NOTE_PREFIX = '__card__'
+const HIDDEN_PREFIX    = '__hidden__'
 
 export function useCardData() {
   const [cards, setCards] = useState([])
@@ -32,11 +33,21 @@ export function useCardData() {
       if (bErr) throw bErr
       if (fnErr) throw fnErr
 
-      // Separate card notes (stored with special prefix) from benefit rows
-      const benefitMap = {}
-      const cardNoteMap = {}
+      // Load custom cards — non-fatal if table doesn't exist yet
+      let customCardRows = []
+      try {
+        const { data } = await supabase.from('custom_cards').select('*')
+        customCardRows = data || []
+      } catch (_) {}
+
+      const benefitMap    = {}
+      const cardNoteMap   = {}
+      const hiddenCardIds = new Set()
+
       for (const r of (benefitRows || [])) {
-        if (r.id.startsWith(CARD_NOTE_PREFIX)) {
+        if (r.id.startsWith(HIDDEN_PREFIX)) {
+          hiddenCardIds.add(r.id.slice(HIDDEN_PREFIX.length))
+        } else if (r.id.startsWith(CARD_NOTE_PREFIX)) {
           cardNoteMap[r.id.slice(CARD_NOTE_PREFIX.length)] = r.notes || ''
         } else {
           benefitMap[r.id] = r
@@ -45,53 +56,71 @@ export function useCardData() {
 
       const fnMap = Object.fromEntries((fnRows || []).map((r) => [r.id, r]))
 
-      const merged = cardsRaw.map((card) => {
-        const benefits = card.benefits.map((b) => {
-          const saved = benefitMap[b.key]
+      function mergeBenefits(cardId, rawBenefits) {
+        return (rawBenefits || []).map((b, i) => {
+          const bKey          = b.key || `${cardId}-b${i}`
+          const saved         = benefitMap[bKey]
           const currentPeriod = getCurrentPeriodKey(b.period)
-
-          let used = b.used
-          // Use Supabase note if it exists; fall back to JSON default note
-          let notes = saved?.notes || b.note || ''
-          let resetPeriod = currentPeriod
+          let used  = b.used || 0
+          let notes = saved?.notes ?? b.note ?? ''
 
           if (saved) {
             if (saved.reset_period !== currentPeriod) {
-              // Period rolled — reset used, keep notes
               used = 0
               supabase
                 .from('benefit_state')
-                .upsert({ id: b.key, card_id: card.id, used: 0, notes, reset_period: currentPeriod })
+                .upsert({ id: bKey, card_id: cardId, used: 0, notes, reset_period: currentPeriod })
                 .then(() => {})
             } else {
               used = saved.used
             }
           }
-
-          return { ...b, used, notes, resetPeriod }
+          return { ...b, key: bKey, used, notes }
         })
+      }
 
-        const freeNights = (card.freeNights || []).map((fn, i) => {
-          const fnId = `${card.id}-fn${i}`
+      function mergeFreeNights(cardId, rawNights) {
+        return (rawNights || []).map((fn, i) => {
+          const fnId  = `${cardId}-fn${i}`
           const saved = fnMap[fnId]
           const { exp: rolledExp, autoRolled } = rollFreeNightExp(fn.exp)
           const expStr = rolledExp.format('YYYY-MM-DD')
-          const used = saved ? saved.used : false
+          const used   = saved ? saved.used : false
 
           if (saved && saved.exp !== expStr) {
             supabase
               .from('free_night_state')
-              .upsert({ id: fnId, card_id: card.id, used, exp: expStr })
+              .upsert({ id: fnId, card_id: cardId, used, exp: expStr })
               .then(() => {})
           }
           return { ...fn, id: fnId, used, exp: expStr, autoRolled }
         })
+      }
 
-        const cardNote = cardNoteMap[card.id] || ''
-        return { ...card, benefits, freeNights, cardNote }
-      })
+      // Built-in cards
+      const merged = cardsRaw
+        .filter(card => !hiddenCardIds.has(card.id))
+        .map(card => ({
+          ...card,
+          benefits:   mergeBenefits(card.id, card.benefits),
+          freeNights: mergeFreeNights(card.id, card.freeNights),
+          cardNote:   cardNoteMap[card.id] || '',
+        }))
 
-      setCards(merged)
+      // Custom cards
+      const customMerged = customCardRows
+        .filter(row => !hiddenCardIds.has(row.id))
+        .map(row => {
+          const card = { id: row.id, isCustom: true, ...row.data }
+          return {
+            ...card,
+            benefits:   mergeBenefits(card.id, card.benefits),
+            freeNights: mergeFreeNights(card.id, card.freeNights),
+            cardNote:   cardNoteMap[card.id] || '',
+          }
+        })
+
+      setCards([...merged, ...customMerged])
     } catch (err) {
       setError(err.message || 'Failed to load data')
     } finally {
@@ -112,14 +141,14 @@ export function useCardData() {
         }
       )
     )
-    const card = cards.find((c) => c.id === cardId)
+    const card    = cards.find((c) => c.id === cardId)
     const benefit = card?.benefits.find((b) => b.key === benefitKey)
     const currentPeriod = getCurrentPeriodKey(benefit?.period || 'annual')
     await supabase.from('benefit_state').upsert({
-      id: benefitKey,
-      card_id: cardId,
-      used:  patch.used  !== undefined ? patch.used  : benefit?.used  ?? 0,
-      notes: patch.notes !== undefined ? patch.notes : benefit?.notes ?? '',
+      id:           benefitKey,
+      card_id:      cardId,
+      used:         patch.used  !== undefined ? patch.used  : benefit?.used  ?? 0,
+      notes:        patch.notes !== undefined ? patch.notes : benefit?.notes ?? '',
       reset_period: currentPeriod,
     })
     touchLastUpdated()
@@ -137,12 +166,12 @@ export function useCardData() {
       )
     )
     const card = cards.find((c) => c.id === cardId)
-    const fn = card?.freeNights.find((f) => f.id === fnId)
+    const fn   = card?.freeNights.find((f) => f.id === fnId)
     await supabase.from('free_night_state').upsert({
-      id: fnId,
+      id:      fnId,
       card_id: cardId,
-      used: patch.used !== undefined ? patch.used : fn?.used ?? false,
-      exp:  patch.exp  !== undefined ? patch.exp  : fn?.exp  ?? '',
+      used:    patch.used !== undefined ? patch.used : fn?.used ?? false,
+      exp:     patch.exp  !== undefined ? patch.exp  : fn?.exp  ?? '',
     })
     touchLastUpdated()
   }, [cards])
@@ -152,14 +181,59 @@ export function useCardData() {
       prev.map((card) => card.id !== cardId ? card : { ...card, cardNote: note })
     )
     await supabase.from('benefit_state').upsert({
-      id: `${CARD_NOTE_PREFIX}${cardId}`,
-      card_id: cardId,
-      used: 0,
-      notes: note,
+      id:           `${CARD_NOTE_PREFIX}${cardId}`,
+      card_id:      cardId,
+      used:         0,
+      notes:        note,
       reset_period: '',
     })
     touchLastUpdated()
   }, [])
 
-  return { cards, loading, error, reload: loadData, updateBenefit, updateFreeNight, updateCardNote, lastUpdated }
+  const addCard = useCallback(async (cardData) => {
+    const id = `custom-${Date.now()}`
+    await supabase.from('custom_cards').insert({ id, data: cardData })
+    const newCard = {
+      id,
+      isCustom:   true,
+      cardNote:   '',
+      ...cardData,
+      benefits: (cardData.benefits || []).map((b, i) => ({
+        ...b,
+        key:   `${id}-b${i}`,
+        notes: b.note || '',
+      })),
+      freeNights: (cardData.freeNights || []).map((fn, i) => ({
+        ...fn,
+        id:         `${id}-fn${i}`,
+        used:       false,
+        autoRolled: false,
+      })),
+    }
+    setCards(prev => [...prev, newCard])
+    touchLastUpdated()
+  }, [])
+
+  const deleteCard = useCallback(async (cardId, isCustom) => {
+    setCards(prev => prev.filter(c => c.id !== cardId))
+    if (isCustom) {
+      await supabase.from('custom_cards').delete().eq('id', cardId)
+    } else {
+      await supabase.from('benefit_state').upsert({
+        id:           `${HIDDEN_PREFIX}${cardId}`,
+        card_id:      cardId,
+        used:         0,
+        notes:        'hidden',
+        reset_period: '',
+      })
+    }
+    touchLastUpdated()
+  }, [])
+
+  return {
+    cards, loading, error, reload: loadData,
+    updateBenefit, updateFreeNight, updateCardNote,
+    addCard, deleteCard,
+    lastUpdated,
+  }
 }
