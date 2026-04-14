@@ -93,7 +93,7 @@ export default function App() {
   const [filter, setFilter] = useState('all')
   const [search, setSearch] = useState('')
 
-  const { cards, loading, error, updateBenefit, updateFreeNight, lastUpdated } =
+  const { cards, loading, error, updateBenefit, updateFreeNight, updateCardNote, lastUpdated } =
     useCardData()
 
   const filteredCards = useMemo(() => {
@@ -180,6 +180,7 @@ export default function App() {
                         card={card}
                         onUpdateBenefit={updateBenefit}
                         onUpdateFreeNight={updateFreeNight}
+                        onUpdateCardNote={updateCardNote}
                       />
                     ))}
                   </div>

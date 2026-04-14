@@ -1,128 +1,106 @@
 import dayjs from 'dayjs'
 
+// All quarterly period types — treated identically (rolling quarters)
+const QUARTERLY = ['quarterly', 'jan-mar', 'apr-jun', 'jul-sep', 'oct-dec']
+
 /**
- * Given a period label, return a stable string key representing the *current*
- * active period window.  Used to detect roll-overs.
- *
- * period values (case-insensitive):
- *   "monthly"        → "2024-Apr"
- *   "quarterly"      → "2024-Q2"
- *   "Jan-Mar" / "Apr-Jun" / "Jul-Sep" / "Oct-Dec"   (fixed 3-month window)
- *   "Jan-Jun" / "Jul-Dec"   (fixed semi-annual)
- *   "annual"         → "2024-annual"
- *   anything else    → treat as annual
+ * Stable key for the current active period window — used to detect rollovers.
  */
 export function getCurrentPeriodKey(period) {
-  const now = dayjs()
-  const p = (period || '').toLowerCase().trim()
-  const year = now.year()
-  const month = now.month() + 1 // 1-based
+  const now   = dayjs()
+  const p     = (period || '').toLowerCase().trim()
+  const year  = now.year()
+  const month = now.month() + 1
+  const q     = Math.ceil(month / 3)
 
-  if (p === 'monthly') {
-    return `${year}-${now.format('MMM')}`
-  }
-
-  if (p === 'quarterly') {
-    const q = Math.ceil(month / 3)
-    return `${year}-Q${q}`
-  }
-
-  // Fixed semi-annual windows by name
-  if (p === 'jan-jun') return month <= 6 ? `${year}-H1` : `${year}-H2-missed`
-  if (p === 'jul-dec') return month >= 7 ? `${year}-H2` : `${year}-H1-missed`
-
-  // Fixed quarterly windows by name
-  if (p === 'jan-mar') return `${year}-${month <= 3 ? 'Q1' : month <= 6 ? 'Q2-p' : month <= 9 ? 'Q3-p' : 'Q4-p'}`
-  if (p === 'apr-jun') return `${year}-${month <= 6 && month >= 4 ? 'Q2' : 'Q-other'}`
-  if (p === 'jul-sep') return `${year}-${month <= 9 && month >= 7 ? 'Q3' : 'Q-other'}`
-  if (p === 'oct-dec') return `${year}-${month >= 10 ? 'Q4' : 'Q-other'}`
-
-  // annual (default)
+  if (p === 'monthly')          return `${year}-${String(month).padStart(2, '0')}`
+  if (QUARTERLY.includes(p))    return `${year}-Q${q}`
+  if (p === 'jan-jun')          return month <= 6 ? `${year}-H1` : `${year}-H1-done`
+  if (p === 'jul-dec')          return month >= 7 ? `${year}-H2` : `${year}-H2-wait`
   return `${year}-annual`
 }
 
 /**
- * Human-readable label for a period (shown on the card).
+ * Human-readable label showing the CURRENT active period with year.
+ *
+ * @param {string} period      - period key from cards.json
+ * @param {string} [resetDate] - "MM-DD" for anniversary resets (e.g. "10-03" for Oct 3)
  */
-export function getPeriodLabel(period) {
-  const p = (period || '').toLowerCase().trim()
-  if (p === 'monthly') return 'Monthly'
-  if (p === 'quarterly') return 'Quarterly'
-  if (p === 'jan-jun') return 'Jan – Jun'
-  if (p === 'jul-dec') return 'Jul – Dec'
-  if (p === 'jan-mar') return 'Jan – Mar'
-  if (p === 'apr-jun') return 'Apr – Jun'
-  if (p === 'jul-sep') return 'Jul – Sep'
-  if (p === 'oct-dec') return 'Oct – Dec'
-  if (p === 'annual') return 'Annual'
-  return period || 'Annual'
+export function getPeriodLabel(period, resetDate) {
+  const now   = dayjs()
+  const p     = (period || '').toLowerCase().trim()
+  const year  = now.year()
+  const month = now.month() + 1
+  const q     = Math.ceil(month / 3)
+
+  // Anniversary-year credits (CSR, etc.) — show the next reset date
+  if (resetDate) {
+    const thisYearReset = dayjs(`${year}-${resetDate}`)
+    const next = now.isAfter(thisYearReset, 'day')
+      ? thisYearReset.add(1, 'year')
+      : thisYearReset
+    return `Resets ${next.format('MMM D, YYYY')}`
+  }
+
+  if (p === 'monthly') return now.format('MMMM YYYY')              // "April 2026"
+
+  if (QUARTERLY.includes(p)) {
+    const labels = ['Jan–Mar', 'Apr–Jun', 'Jul–Sep', 'Oct–Dec']
+    return `${labels[q - 1]} ${year}`                              // "Apr–Jun 2026"
+  }
+
+  if (p === 'annual') return String(year)                          // "2026"
+
+  // Half-year windows
+  if (p === 'jan-jun') {
+    return month <= 6 ? `Jan–Jun ${year}` : `Jan–Jun ${year + 1}`
+  }
+  if (p === 'jul-dec') {
+    return `Jul–Dec ${year}`
+  }
+
+  return period || String(year)
 }
 
 /**
- * Returns true when a benefit should be considered "urgent" — i.e. the period
- * is ending soon and there is remaining value.
+ * True when a benefit period is ending soon and there is remaining value.
  */
 export function isUrgent(period, used, total) {
-  if (used >= total) return false
-  const remaining = total - used
-  if (remaining <= 0) return false
+  if (total <= 0 || used >= total) return false
 
-  const now = dayjs()
-  const p = (period || '').toLowerCase().trim()
-  const month = now.month() + 1 // 1-based
-  const day = now.date()
+  const now   = dayjs()
+  const p     = (period || '').toLowerCase().trim()
+  const month = now.month() + 1
+  const day   = now.date()
 
-  // Monthly: last 7 days of the month
-  if (p === 'monthly') {
-    const daysInMonth = now.daysInMonth()
-    return daysInMonth - day <= 6
+  if (p === 'monthly') return now.daysInMonth() - day <= 6
+
+  if (QUARTERLY.includes(p)) {
+    const isLastMonthOfQuarter = [3, 6, 9, 12].includes(month)
+    return isLastMonthOfQuarter && now.daysInMonth() - day <= 14
   }
 
-  // Quarterly (calendar)
-  if (p === 'quarterly') {
-    const quarterEndMonths = [3, 6, 9, 12]
-    const isLastMonthOfQuarter = quarterEndMonths.includes(month)
-    return isLastMonthOfQuarter && daysInMonth(now) - day <= 14
-  }
-
-  // Semi-annual windows — last 2 weeks of the window
-  if (p === 'jan-jun') return month === 6 && day >= 17
-  if (p === 'jul-dec') return month === 12 && day >= 17
-
-  // Named quarterly windows
-  if (p === 'jan-mar') return month === 3 && day >= 17
-  if (p === 'apr-jun') return month === 6 && day >= 17
-  if (p === 'jul-sep') return month === 9 && day >= 17
-  if (p === 'oct-dec') return month === 12 && day >= 17
-
-  // Annual: last month of the year
-  if (p === 'annual') return month === 12 && day >= 1
-
+  if (p === 'jan-jun')  return month === 6  && day >= 17
+  if (p === 'jul-dec')  return month === 12 && day >= 17
+  if (p === 'annual')   return month === 12 && day >= 1
   return false
 }
 
-function daysInMonth(d) {
-  return d.daysInMonth()
-}
-
 /**
- * Auto-roll a free-night expiration date to next year if it has passed.
- * Returns a dayjs object.
+ * Auto-roll a free-night expiration to next year if it has passed.
+ * Returns { exp: dayjsObj, autoRolled: boolean }
  */
 export function rollFreeNightExp(expStr) {
   const exp = dayjs(expStr)
   const now = dayjs()
   if (exp.isBefore(now, 'day')) {
-    return exp.add(1, 'year')
+    return { exp: exp.add(1, 'year'), autoRolled: true }
   }
-  return exp
+  return { exp, autoRolled: false }
 }
 
-/**
- * Returns true if a free-night is expiring within 60 days.
- */
+/** True if a free night expires within 60 days. */
 export function isFreeNightUrgent(expStr) {
-  const exp = dayjs(expStr)
-  const now = dayjs()
-  return exp.diff(now, 'day') <= 60 && exp.diff(now, 'day') >= 0
+  const diff = dayjs(expStr).diff(dayjs(), 'day')
+  return diff >= 0 && diff <= 60
 }

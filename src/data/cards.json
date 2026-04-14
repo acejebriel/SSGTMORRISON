@@ -9,11 +9,11 @@
       { "key": "ace-plat-1-resy",    "name": "Resy credit",                  "used": 0,  "total": 100, "period": "Jan-Mar" },
       { "key": "ace-plat-1-saks",    "name": "Saks Fifth Avenue",            "used": 0,  "total": 50,  "period": "Jan-Jun" },
       { "key": "ace-plat-1-hotel",   "name": "Amex Fine Hotels & Resorts",   "used": 0,  "total": 300, "period": "Jan-Jun" },
-      { "key": "ace-plat-1-airline", "name": "Airline credit (United)",      "used": 0,  "total": 200, "period": "annual"  },
+      { "key": "ace-plat-1-airline", "name": "Airline credit", "note": "United", "used": 0,  "total": 200, "period": "annual"  },
       { "key": "ace-plat-1-oura",    "name": "Oura Ring credit",             "used": 0,  "total": 200, "period": "annual"  },
-      { "key": "ace-plat-1-clear",   "name": "CLEAR Plus (renews Oct)",      "used": 0,  "total": 189, "period": "annual"  },
-      { "key": "ace-plat-1-digital", "name": "Digital credit (Paramount+)",  "used": 25, "total": 25,  "period": "monthly" },
-      { "key": "ace-plat-1-walmart", "name": "Walmart+ (Ace)",               "used": 0,  "total": 0,   "period": "monthly" }
+      { "key": "ace-plat-1-clear",   "name": "CLEAR Plus", "note": "renews Oct", "used": 0,  "total": 189, "period": "annual"  },
+      { "key": "ace-plat-1-digital", "name": "Digital credit", "note": "Paramount+", "used": 0, "total": 25,  "period": "monthly" },
+      { "key": "ace-plat-1-walmart", "name": "Walmart+", "note": "Ace", "used": 0,  "total": 0,   "period": "monthly" }
     ],
     "freeNights": []
   },
@@ -27,10 +27,10 @@
       { "key": "ace-plat-2-resy",    "name": "Resy credit",                       "used": 0,  "total": 100, "period": "Jan-Mar" },
       { "key": "ace-plat-2-saks",    "name": "Saks Fifth Avenue",                 "used": 0,  "total": 50,  "period": "Jan-Jun" },
       { "key": "ace-plat-2-hotel",   "name": "Amex Fine Hotels & Resorts",        "used": 0,  "total": 300, "period": "Jan-Jun" },
-      { "key": "ace-plat-2-airline", "name": "Airline credit (United)",           "used": 0,  "total": 200, "period": "annual"  },
+      { "key": "ace-plat-2-airline", "name": "Airline credit", "note": "United", "used": 0,  "total": 200, "period": "annual"  },
       { "key": "ace-plat-2-oura",    "name": "Oura Ring credit",                  "used": 0,  "total": 200, "period": "annual"  },
-      { "key": "ace-plat-2-clear",   "name": "CLEAR Plus (Ace, renews Mar 30)",   "used": 0,  "total": 189, "period": "annual"  },
-      { "key": "ace-plat-2-digital", "name": "Digital credit (Hulu No Ads)",      "used": 20, "total": 25,  "period": "monthly" }
+      { "key": "ace-plat-2-clear",   "name": "CLEAR Plus", "note": "Ace — renews Mar 30", "used": 0,  "total": 189, "period": "annual"  },
+      { "key": "ace-plat-2-digital", "name": "Digital credit", "note": "Hulu No Ads", "used": 0, "total": 25,  "period": "monthly" }
     ],
     "freeNights": []
   },
@@ -44,10 +44,10 @@
       { "key": "ace-plat-3-resy",    "name": "Resy credit",                         "used": 0,  "total": 100, "period": "Jan-Mar" },
       { "key": "ace-plat-3-saks",    "name": "Saks Fifth Avenue",                   "used": 0,  "total": 50,  "period": "Jan-Jun" },
       { "key": "ace-plat-3-hotel",   "name": "Amex Fine Hotels & Resorts",          "used": 0,  "total": 300, "period": "Jan-Jun" },
-      { "key": "ace-plat-3-airline", "name": "Airline credit (United)",             "used": 0,  "total": 200, "period": "annual"  },
+      { "key": "ace-plat-3-airline", "name": "Airline credit", "note": "United", "used": 0,  "total": 200, "period": "annual"  },
       { "key": "ace-plat-3-oura",    "name": "Oura Ring credit",                    "used": 0,  "total": 200, "period": "annual"  },
-      { "key": "ace-plat-3-clear",   "name": "CLEAR Plus (Rebecca, renews Aug 31)", "used": 0,  "total": 189, "period": "annual"  },
-      { "key": "ace-plat-3-digital", "name": "Digital credit (YouTube Premium)",    "used": 24, "total": 25,  "period": "monthly" }
+      { "key": "ace-plat-3-clear",   "name": "CLEAR Plus", "note": "Rebecca — renews Aug 31", "used": 0,  "total": 189, "period": "annual"  },
+      { "key": "ace-plat-3-digital", "name": "Digital credit", "note": "YouTube Premium", "used": 0, "total": 25,  "period": "monthly" }
     ],
     "freeNights": []
   },
@@ -61,10 +61,10 @@
       { "key": "ace-plat-4-resy",    "name": "Resy credit",                      "used": 0,  "total": 100, "period": "Jan-Mar" },
       { "key": "ace-plat-4-saks",    "name": "Saks Fifth Avenue",                "used": 0,  "total": 50,  "period": "Jan-Jun" },
       { "key": "ace-plat-4-hotel",   "name": "Amex Fine Hotels & Resorts",       "used": 0,  "total": 300, "period": "Jan-Jun" },
-      { "key": "ace-plat-4-airline", "name": "Airline credit (United)",          "used": 0,  "total": 200, "period": "annual"  },
+      { "key": "ace-plat-4-airline", "name": "Airline credit", "note": "United", "used": 0,  "total": 200, "period": "annual"  },
       { "key": "ace-plat-4-oura",    "name": "Oura Ring credit",                 "used": 0,  "total": 200, "period": "annual"  },
-      { "key": "ace-plat-4-clear",   "name": "CLEAR Plus (Ara, renews Jul 31)",  "used": 0,  "total": 189, "period": "annual"  },
-      { "key": "ace-plat-4-digital", "name": "Digital credit (Peacock + AppleTV)","used": 25, "total": 25,  "period": "monthly" }
+      { "key": "ace-plat-4-clear",   "name": "CLEAR Plus", "note": "Ara — renews Jul 31", "used": 0,  "total": 189, "period": "annual"  },
+      { "key": "ace-plat-4-digital", "name": "Digital credit", "note": "Peacock + AppleTV", "used": 0, "total": 25,  "period": "monthly" }
     ],
     "freeNights": []
   },
@@ -78,10 +78,10 @@
       { "key": "ace-plat-5-resy",    "name": "Resy credit",                         "used": 0, "total": 100, "period": "Jan-Mar" },
       { "key": "ace-plat-5-saks",    "name": "Saks Fifth Avenue",                   "used": 0, "total": 50,  "period": "Jan-Jun" },
       { "key": "ace-plat-5-hotel",   "name": "Amex Fine Hotels & Resorts",          "used": 0, "total": 300, "period": "Jan-Jun" },
-      { "key": "ace-plat-5-airline", "name": "Airline credit (United)",             "used": 0, "total": 200, "period": "annual"  },
+      { "key": "ace-plat-5-airline", "name": "Airline credit", "note": "United", "used": 0, "total": 200, "period": "annual"  },
       { "key": "ace-plat-5-oura",    "name": "Oura Ring credit",                    "used": 0, "total": 200, "period": "annual"  },
-      { "key": "ace-plat-5-clear",   "name": "CLEAR Plus (Chuck, renews Aug 31)",   "used": 0, "total": 189, "period": "annual"  },
-      { "key": "ace-plat-5-digital", "name": "Digital credit (Disney+, ESPN $6)",   "used": 0, "total": 25,  "period": "monthly" }
+      { "key": "ace-plat-5-clear",   "name": "CLEAR Plus", "note": "Chuck — renews Aug 31", "used": 0, "total": 189, "period": "annual"  },
+      { "key": "ace-plat-5-digital", "name": "Digital credit", "note": "Disney+, ESPN $6", "used": 0, "total": 25,  "period": "monthly" }
     ],
     "freeNights": []
   },
@@ -95,9 +95,9 @@
       { "key": "ace-plat-6-resy",    "name": "Resy credit",                   "used": 0, "total": 100, "period": "Jan-Mar" },
       { "key": "ace-plat-6-saks",    "name": "Saks Fifth Avenue",             "used": 0, "total": 50,  "period": "Jan-Jun" },
       { "key": "ace-plat-6-hotel",   "name": "Amex Fine Hotels & Resorts",    "used": 0, "total": 300, "period": "Jan-Jun" },
-      { "key": "ace-plat-6-airline", "name": "Airline credit (United)",       "used": 0, "total": 200, "period": "annual"  },
+      { "key": "ace-plat-6-airline", "name": "Airline credit", "note": "United", "used": 0, "total": 200, "period": "annual"  },
       { "key": "ace-plat-6-oura",    "name": "Oura Ring credit",              "used": 0, "total": 200, "period": "annual"  },
-      { "key": "ace-plat-6-clear",   "name": "CLEAR Plus (renews Nov 15)",    "used": 0, "total": 189, "period": "annual"  },
+      { "key": "ace-plat-6-clear",   "name": "CLEAR Plus", "note": "renews Nov 15", "used": 0, "total": 189, "period": "annual"  },
       { "key": "ace-plat-6-digital", "name": "Digital credit",                "used": 0, "total": 25,  "period": "monthly" }
     ],
     "freeNights": []
@@ -109,12 +109,12 @@
     "name": "Biz Plat 1 - 11001",
     "owner": "ace",
     "benefits": [
-      { "key": "ace-biz-plat-1-airline",  "name": "Airline credit (United)",         "used": 0, "total": 200, "period": "annual"  },
-      { "key": "ace-biz-plat-1-hotel",    "name": "Hotel credit (Waldorf Orlando)",   "used": 0, "total": 300, "period": "Jan-Jun" },
+      { "key": "ace-biz-plat-1-airline",  "name": "Airline credit", "note": "United", "used": 0, "total": 200, "period": "annual"  },
+      { "key": "ace-biz-plat-1-hotel",    "name": "Hotel credit", "note": "Waldorf Orlando", "used": 0, "total": 300, "period": "Jan-Jun" },
       { "key": "ace-biz-plat-1-dell",     "name": "Dell credit",                      "used": 0, "total": 150, "period": "Jan-Jun" },
       { "key": "ace-biz-plat-1-hilton",   "name": "Hilton credit",                    "used": 0, "total": 50,  "period": "Jan-Mar" },
       { "key": "ace-biz-plat-1-wireless", "name": "Wireless credit",                  "used": 0, "total": 10,  "period": "monthly" },
-      { "key": "ace-biz-plat-1-tsa",      "name": "Global Entry (Ace)",               "used": 0, "total": 0,   "period": "annual"  }
+      { "key": "ace-biz-plat-1-tsa",      "name": "Global Entry", "note": "Ace", "used": 0, "total": 0,   "period": "annual"  }
     ],
     "freeNights": []
   },
@@ -125,12 +125,12 @@
     "num": "51002",
     "owner": "ace",
     "benefits": [
-      { "key": "ace-biz-plat-2-airline",  "name": "Airline credit (United)",          "used": 200, "total": 200, "period": "annual"  },
-      { "key": "ace-biz-plat-2-hotel",    "name": "Hotel credit (Waldorf Orlando)",    "used": 0,   "total": 300, "period": "Jul-Dec" },
+      { "key": "ace-biz-plat-2-airline",  "name": "Airline credit", "note": "United", "used": 200, "total": 200, "period": "annual"  },
+      { "key": "ace-biz-plat-2-hotel",    "name": "Hotel credit", "note": "Waldorf Orlando", "used": 0,   "total": 300, "period": "Jul-Dec" },
       { "key": "ace-biz-plat-2-dell",     "name": "Dell credit",                       "used": 0,   "total": 150, "period": "Jul-Dec" },
       { "key": "ace-biz-plat-2-hilton",   "name": "Hilton credit",                     "used": 0,   "total": 50,  "period": "Jan-Mar" },
       { "key": "ace-biz-plat-2-wireless", "name": "Wireless credit",                   "used": 0,   "total": 10,  "period": "monthly" },
-      { "key": "ace-biz-plat-2-tsa",      "name": "Global Entry (Haley)",              "used": 0,   "total": 0,   "period": "annual"  }
+      { "key": "ace-biz-plat-2-tsa",      "name": "Global Entry", "note": "Haley", "used": 0,   "total": 0,   "period": "annual"  }
     ],
     "freeNights": []
   },
@@ -141,8 +141,8 @@
     "num": "02009",
     "owner": "ace",
     "benefits": [
-      { "key": "ace-biz-plat-3-airline",  "name": "Airline credit (United)",          "used": 200, "total": 200, "period": "annual"  },
-      { "key": "ace-biz-plat-3-hotel",    "name": "Hotel credit (Waldorf Orlando)",    "used": 0,   "total": 300, "period": "Jul-Dec" },
+      { "key": "ace-biz-plat-3-airline",  "name": "Airline credit", "note": "United", "used": 200, "total": 200, "period": "annual"  },
+      { "key": "ace-biz-plat-3-hotel",    "name": "Hotel credit", "note": "Waldorf Orlando", "used": 0,   "total": 300, "period": "Jul-Dec" },
       { "key": "ace-biz-plat-3-dell",     "name": "Dell credit",                       "used": 0,   "total": 150, "period": "Jul-Dec" },
       { "key": "ace-biz-plat-3-hilton",   "name": "Hilton credit",                     "used": 0,   "total": 50,  "period": "Jan-Mar" },
       { "key": "ace-biz-plat-3-wireless", "name": "Wireless credit",                   "used": 0,   "total": 10,  "period": "monthly" }
@@ -157,7 +157,7 @@
     "num": "82002",
     "owner": "ace",
     "benefits": [
-      { "key": "ace-delta-biz-hotel", "name": "Hotel stay credit (resets Jan)", "used": 0, "total": 250, "period": "annual"  },
+      { "key": "ace-delta-biz-hotel", "name": "Hotel stay credit", "used": 0, "total": 250, "period": "annual"  },
       { "key": "ace-delta-biz-resy",  "name": "Resy credit",                    "used": 0, "total": 20,  "period": "monthly" },
       { "key": "ace-delta-biz-ride",  "name": "Rideshare credit",               "used": 0, "total": 10,  "period": "monthly" }
     ],
@@ -172,7 +172,7 @@
     "num": "73007",
     "owner": "ace",
     "benefits": [
-      { "key": "ace-delta-reserve-hotel", "name": "Hotel stay credit (resets Jan)", "used": 0, "total": 200, "period": "annual"  },
+      { "key": "ace-delta-reserve-hotel", "name": "Hotel stay credit", "used": 0, "total": 200, "period": "annual"  },
       { "key": "ace-delta-reserve-resy",  "name": "Resy credit",                    "used": 0, "total": 20,  "period": "monthly" },
       { "key": "ace-delta-reserve-ride",  "name": "Rideshare credit",               "used": 0, "total": 10,  "period": "monthly" }
     ],
@@ -189,8 +189,8 @@
     "owner": "ace",
     "benefits": [
       { "key": "ace-gold-resy",     "name": "Resy credit",      "used": 0,  "total": 50, "period": "Jan-Jun" },
-      { "key": "ace-gold-dunkin",   "name": "Dunkin' credit",   "used": 7,  "total": 7,  "period": "monthly" },
-      { "key": "ace-gold-fiveguys", "name": "Five Guys credit", "used": 10, "total": 10, "period": "monthly" }
+      { "key": "ace-gold-dunkin",   "name": "Dunkin' credit",   "used": 0, "total": 7,  "period": "monthly" },
+      { "key": "ace-gold-fiveguys", "name": "Five Guys credit", "used": 0, "total": 10, "period": "monthly" }
     ],
     "freeNights": []
   },
@@ -217,7 +217,7 @@
     "num": "507",
     "owner": "ace",
     "benefits": [
-      { "key": "ace-csr-1-travel",     "name": "Travel credit (resets Oct 3)",  "used": 300, "total": 300, "period": "annual"  },
+      { "key": "ace-csr-1-travel",     "name": "Travel credit", "resetDate": "10-03", "used": 300, "total": 300, "period": "annual"  },
       { "key": "ace-csr-1-dd-grocery", "name": "DoorDash grocery credit",        "used": 0,   "total": 20,  "period": "monthly" },
       { "key": "ace-csr-1-dd-resto",   "name": "DoorDash restaurant credit",     "used": 0,   "total": 5,   "period": "monthly" }
     ],
@@ -230,7 +230,7 @@
     "num": "375",
     "owner": "ace",
     "benefits": [
-      { "key": "ace-csr-2-travel",     "name": "Travel credit (resets May 8)",  "used": 300, "total": 300, "period": "annual"  },
+      { "key": "ace-csr-2-travel",     "name": "Travel credit", "resetDate": "05-08", "used": 300, "total": 300, "period": "annual"  },
       { "key": "ace-csr-2-dd-grocery", "name": "DoorDash grocery credit",        "used": 0,   "total": 20,  "period": "monthly" },
       { "key": "ace-csr-2-dd-resto",   "name": "DoorDash restaurant credit",     "used": 0,   "total": 5,   "period": "monthly" }
     ],
@@ -243,7 +243,7 @@
     "num": "0017",
     "owner": "haley",
     "benefits": [
-      { "key": "haley-csr-travel", "name": "Travel credit (resets Sept 10)", "used": 0, "total": 300, "period": "annual" }
+      { "key": "haley-csr-travel", "name": "Travel credit", "resetDate": "09-10", "used": 0, "total": 300, "period": "annual" }
     ],
     "freeNights": []
   },
@@ -270,9 +270,9 @@
       { "key": "haley-plat-1-resy",    "name": "Resy credit",                        "used": 0,  "total": 100, "period": "Jan-Mar" },
       { "key": "haley-plat-1-saks",    "name": "Saks Fifth Avenue",                  "used": 50, "total": 50,  "period": "Jan-Jun" },
       { "key": "haley-plat-1-hotel",   "name": "Amex Fine Hotels & Resorts",         "used": 0,  "total": 300, "period": "Jan-Jun" },
-      { "key": "haley-plat-1-airline", "name": "Airline credit (United)",            "used": 0,  "total": 200, "period": "annual"  },
+      { "key": "haley-plat-1-airline", "name": "Airline credit", "note": "United", "used": 0,  "total": 200, "period": "annual"  },
       { "key": "haley-plat-1-oura",    "name": "Oura Ring credit",                   "used": 0,  "total": 200, "period": "annual"  },
-      { "key": "haley-plat-1-clear",   "name": "CLEAR Plus (Haley, renews Mar 10)",  "used": 0,  "total": 189, "period": "annual"  },
+      { "key": "haley-plat-1-clear",   "name": "CLEAR Plus", "note": "Haley — renews Mar 10", "used": 0,  "total": 189, "period": "annual"  },
       { "key": "haley-plat-1-digital", "name": "Digital credit",                     "used": 0,  "total": 25,  "period": "monthly" }
     ],
     "freeNights": []
@@ -309,7 +309,7 @@
       { "key": "haley-plat-3-airline", "name": "Airline credit (United)", "used": 0, "total": 200, "period": "annual"  },
       { "key": "haley-plat-3-oura",    "name": "Oura Ring credit",    "used": 0,  "total": 200, "period": "annual"  },
       { "key": "haley-plat-3-clear",   "name": "CLEAR Plus",          "used": 0,  "total": 189, "period": "annual"  },
-      { "key": "haley-plat-3-digital", "name": "Digital credit",      "used": 25, "total": 25,  "period": "monthly" }
+      { "key": "haley-plat-3-digital", "name": "Digital credit",      "used": 0, "total": 25,  "period": "monthly" }
     ],
     "freeNights": []
   },
