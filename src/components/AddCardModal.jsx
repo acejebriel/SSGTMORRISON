@@ -26,6 +26,8 @@ export default function AddCardModal({ onAdd, onClose }) {
   const [owner,      setOwner]      = useState('ace')
   const [benefits,   setBenefits]   = useState([emptyBenefit()])
   const [freeNights, setFreeNights] = useState([])
+  const [saving,     setSaving]     = useState(false)
+  const [saveError,  setSaveError]  = useState(null)
 
   function updateBenefit(i, field, value) {
     setBenefits(prev => prev.map((b, idx) => idx === i ? { ...b, [field]: value } : b))
@@ -34,14 +36,17 @@ export default function AddCardModal({ onAdd, onClose }) {
     setFreeNights(prev => prev.map((fn, idx) => idx === i ? { ...fn, [field]: value } : fn))
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     if (!name.trim()) return
-    onAdd({
-      name:    name.trim(),
-      num:     num.trim() || undefined,
-      issuer,
-      owner,
+    setSaving(true)
+    setSaveError(null)
+    try {
+      await onAdd({
+        name:    name.trim(),
+        num:     num.trim() || undefined,
+        issuer,
+        owner,
       benefits: benefits
         .filter(b => b.name.trim())
         .map(b => ({
@@ -54,8 +59,13 @@ export default function AddCardModal({ onAdd, onClose }) {
       freeNights: freeNights
         .filter(fn => fn.label.trim() && fn.exp)
         .map(fn => ({ label: fn.label.trim(), exp: fn.exp })),
-    })
-    onClose()
+      })
+      onClose()
+    } catch (err) {
+      setSaveError(err.message)
+    } finally {
+      setSaving(false)
+    }
   }
 
   return (
@@ -208,10 +218,19 @@ export default function AddCardModal({ onAdd, onClose }) {
             </div>
           </div>
 
+          {/* Error */}
+          {saveError && (
+            <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg px-3 py-2 text-xs">
+              Failed to save: {saveError}
+            </div>
+          )}
+
           {/* Actions */}
           <div className="flex justify-end gap-2 pt-1 border-t border-gray-100">
-            <button type="button" onClick={onClose} className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg">Cancel</button>
-            <button type="submit" className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium">Add Card</button>
+            <button type="button" onClick={onClose} disabled={saving} className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg disabled:opacity-50">Cancel</button>
+            <button type="submit" disabled={saving} className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium disabled:opacity-50">
+              {saving ? 'Saving…' : 'Add Card'}
+            </button>
           </div>
         </form>
       </div>

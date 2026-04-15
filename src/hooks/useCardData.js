@@ -192,7 +192,8 @@ export function useCardData() {
 
   const addCard = useCallback(async (cardData) => {
     const id = `custom-${Date.now()}`
-    await supabase.from('custom_cards').insert({ id, data: cardData })
+    const { error: insertErr } = await supabase.from('custom_cards').insert({ id, data: cardData })
+    if (insertErr) throw new Error(insertErr.message)
     const newCard = {
       id,
       isCustom:   true,
